@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+    <script src="stocks_script.js"></script>
+<body>
+    <div class="header">
+        <h2>Stocks</h2>
+    </div>
+
+    <div class="navigation">
+        <a class="nav-button" href="index.html">Home</a>
+        <a class="nav-button" href="stocks.html">Stocks</a>
+        <a class="nav-button" href="dogs.html">Dogs</a>
+    </div>
+
+    <div class="stocks-container">
+        <h2>Let's Chart some Stocks!</h2>
+        <form onsubmit="main(event)">
+            <input id="stocks-input" required> <br>
+            <select id="time-selection" required>
+                <option value="30">30 Days</option>
+                <option value="60">60 Days</option>
+                <option value="90">90 Days</option>
+            </select> <br>
+            <button type="submit">Lookup!</button>
+        </form>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="stock-prices"></canvas>
+    </div>
+
+    <div id="tickers-table"></div>
+
+    <div class="audio-container">
+        <div class="audio-header">
+            <h2>You can Navigate using audio!</h2>
+        </div>
+        
+        <p>Ensure you Mic is enabled to use this feature.</p>
+
+        <ul>
+            <li>Navigate to a Different Page</li>
+            <ul>
+                <li>Say: <b>Navigate to (page)</b></li>
+            </ul>
+
+            <li>Change the Page Color</li>
+            <ul>
+                <li>Say: <b>Change the color to (color)</b></li>
+            </ul>
+
+            <li>Say Hello Back to you!</li>
+            <ul>
+                <li>Say: <b>Hello</b></li>
+            </ul>
+
+            <li>Load a Stock Ticker!</li>
+            <ul>
+                <li>Say: <b>Load up (Stock Ticker)</b></li>
+            </ul>
+        </ul>
+
+        <div class="audio-button-container">
+            <button id="enable-listening" onclick="enableListening()">Enable Listening</button>
+            <button id="disable-listening" onclick="disableListening()">Disable Listening</button>
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dogs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-slider/1.0.0/simpleslider.min.js"></script>
+    <script src="dogs_script.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h2>Dogs</h2>
+    </div>
+
+    <div class="navigation">
+        <a class="nav-button" href="index.html">Home</a>
+        <a class="nav-button" href="stocks.html">Stocks</a>
+        <a class="nav-button" href="dogs.html">Dogs</a>
+    </div>
+
+    <div id="slider" data-simple-slider></div>
+
+    <div id="dog-button-container"></div>
+    <div id="dog-desc-container"></div>
+
+    <div class="audio-container">
+        <div class="audio-header">
+            <h2>You can Navigate using audio!</h2>
+        </div>
+        
+        <p>Ensure you Mic is enabled to use this feature.</p>
+
+        <ul>
+            <li>Navigate to a Different Page</li>
+            <ul>
+                <li>Say: <b>Navigate to (page)</b></li>
+            </ul>
+
+            <li>Change the Page Color</li>
+            <ul>
+                <li>Say: <b>Change the color to (color)</b></li>
+            </ul>
+
+            <li>Say Hello Back to you!</li>
+            <ul>
+                <li>Say: <b>Hello</b></li>
+            </ul>
+
+            <li>Open a Dog Breed Description!</li>
+            <ul>
+                <li>Say: <b>Load Dog Breed (Dog Breed)</b></li>
+            </ul>
+        </ul>
+
+        <div class="audio-button-container">
+            <button id="enable-listening" onclick="enableListening()">Enable Listening</button>
+            <button id="disable-listening" onclick="disableListening()">Disable Listening</button>
+        </div>
+        
+    </div>
+</body>
+</html>
