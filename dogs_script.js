@@ -1,4 +1,7 @@
-window.onload = main;
+window.onload = function() {
+  main();
+  dogBreed();
+};
 
 async function main() {
   try {
@@ -29,6 +32,55 @@ async function main() {
   simpleslider.getSlider();
 }
 
+async function dogBreed() {
+  try {
+    const response = await fetch(`https://dogapi.dog/api/v2/breeds`);
+    const result = await response.json();
+    const breeds = result.data;
+    const container = document.getElementById("dog-button-container");
+    const descContainer = document.getElementById("dog-desc-container");
+    console.log(result);
+
+    let activeDesc = null;
+
+    for (let i = 0; i < breeds.length;i++) {
+      let att = breeds[i].attributes;
+      const button = document.createElement('button');
+      button.textContent = att.name;
+      container.appendChild(button);
+
+      let descDiv = document.createElement('div');
+
+      button.onclick = function() {
+
+        if (activeDesc) {
+          activeDesc.style.display ='none'
+        }
+
+        descDiv.innerHTML = 
+        `<h2>Name:${att.name} <br>
+        <p>Description:${att.description} <br>
+        <p>Min Life:${att.life.min} <br>
+        <p> Max Life:${att.life.max}`;
+        descDiv.style.display = 'block';
+        activeDesc = descDiv;
+      }
+      descContainer.appendChild(descDiv);
+    }
+    
+  }
+
+  catch(err) {
+    console.log(err);
+    return err.message;
+  }
+
+  finally {
+    console.log("finally");
+  }
+}
+
+
 function enableListening() {
     if (annyang) {
         const commands = {
@@ -47,6 +99,16 @@ function enableListening() {
                 window.location.href = "stocks.html";
             }
           },
+          'load dog breed *breed': (breed) => {
+            const buttons = document.querySelectorAll('#dog-button-container button');
+            const btn = Array.from(buttons).find(b =>
+              b.textContent === breed
+            );
+            if (btn) {
+              btn.click();
+            }
+            console.log(breed);
+          }
         };
       
         annyang.addCommands(commands);

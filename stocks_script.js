@@ -170,6 +170,10 @@ function enableListening() {
                 window.location.href = "stocks.html";
             }
           },
+          'lookup *stock': (stock) => {
+            audioStock(stock);
+            console.log(stock);
+          }
         };
       
         annyang.addCommands(commands);
@@ -184,4 +188,58 @@ function disableListening() {
         annyang.abort();
         console.log("stopped listening!")
       }
+}
+
+async function audioStock(stock) {
+    try {
+        const apiKey = 	'DwYGmV7Kwt1QeU6MixNIG14hCuwKxmJW';
+        const response = await fetch(`https://api.polygon.io/v2/aggs/ticker/${stock}/range/1/day/2025-04-04/2025-05-04?apiKey=${apiKey}`);
+        const result = await response.json();
+        console.log(result);
+
+        const bars = result.results;
+        const labels = [];
+        const dataPoints = [];
+        for (let i = 0; i < bars.length; i++) {
+            const date = new Date(bars[i].t);
+            labels.push(date.toLocaleDateString());
+            dataPoints.push(bars[i].c);
+        }
+        console.log(labels);
+        console.log(dataPoints);
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: '($) Stock Price',
+                data: dataPoints,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+              }]
+        }
+
+
+        if (stocks) {
+            stocks.destroy();
+        }
+
+        const chartDiv = document.getElementById("stock-prices");
+        stocks = new Chart (
+            chartDiv,
+            {
+                type:'line',
+                data: data,
+            }
+        )
+    }
+
+    catch(err) {
+        console.log(err);
+        return err.message;
+    }
+
+    finally {
+        console.log("finally");
+    }
 }

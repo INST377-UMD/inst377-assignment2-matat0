@@ -130,3 +130,21 @@ body {
     height:500px;
     overflow:hidden;
 }
+
+#slider img {
+    width:500px;
+    height:500px;
+}
+
+#dog-button-container {
+    display:flex;
+    flex-direction:row;
+}
+
+#dog-button-container button{
+    font-family:$nunito;
+    background-color:$bg-module;
+    color:white;
+    margin:10px;
+    padding:10px;
+}
