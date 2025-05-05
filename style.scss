@@ -121,3 +121,12 @@ body {
     width:700;
     height:400;
 }
+
+#slider {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    width:500px;
+    height:500px;
+    overflow:hidden;
+}
