@@ -30,7 +30,7 @@ async function main(event) {
         const result = await response.json();
         console.log(result);
 
-        /*const labels = Utils.months({count: 7});
+        const labels = Utils.months({count: 7});
         const data = {
             labels: labels,
             datasets: [{
@@ -40,7 +40,7 @@ async function main(event) {
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
             }]
-        };*/
+        };
     }
 
     catch(err) {
@@ -52,18 +52,6 @@ async function main(event) {
         console.log("finally");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function enableListening() {
