@@ -1,3 +1,77 @@
+window.onload = table;
+
+async function table() {
+    try {
+        const response = await fetch(`https://tradestie.com/api/v1/apps/reddit?date=2022-04-03`);
+        const result = await response.json();
+        console.log(result);
+
+
+        const container = document.getElementById("tickers-table");
+        const table = document.createElement('table');
+        const headerRow = table.insertRow();
+
+        const tickerHeader = document.createElement('th');
+        tickerHeader.textContent='Ticker';
+
+        const commentHeader = document.createElement('th');
+        tickerHeader.textContent='Number of Comments';
+        headerRow.appendChild(commentHeader);
+
+        const sentimentHeader = document.createElement('th');
+        sentimentHeader.textContent='Sentiment';
+        headerRow.appendChild(sentimentHeader);
+
+        for (let i = 0;i < 5;i++) {
+            const item = result[i];
+            const row = table.insertRow();
+
+            const cellTicker = row.insertCell();
+            cellTicker.textContent = item.ticker;
+
+            const cellComments = row.insertCell();
+            cellComments.textContent = item.no_of_comments;
+
+            const cellSentiment = row.insertCell();
+            const img = document.createElement("img");
+            if (item.sentiment == 'Bullish') {
+                img.src="bullish.png"
+            }
+            else if (item.sentiment == 'Bearish') {
+                img.src="bearish.jpg"
+            }
+
+            img.width = 50;
+            img.height = 50;
+            cellSentiment.appendChild(img);
+        }
+
+        container.innerHTML = '';
+        container.appendChild(table);
+        console.log(table);
+        
+        
+    }
+    
+    catch(err) {
+        console.log(err);
+        return err.message;
+    }
+
+    finally {
+        console.log("finally");
+    }
+}
+
+
+
+
+
+
+
+
+let stocks = null;
+
 async function main(event) {
     event.preventDefault();
     try {
@@ -30,17 +104,41 @@ async function main(event) {
         const result = await response.json();
         console.log(result);
 
-        const labels = Utils.months({count: 7});
+        const bars = result.results;
+        const labels = [];
+        const dataPoints = [];
+        for (let i = 0; i < bars.length; i++) {
+            const date = new Date(bars[i].t);
+            labels.push(date.toLocaleDateString());
+            dataPoints.push(bars[i].c);
+        }
+        console.log(labels);
+        console.log(dataPoints);
+
         const data = {
             labels: labels,
             datasets: [{
-                label: 'My First Dataset',
-                data: [65, 59, 80, 81, 56, 55, 40],
+                label: '($) Stock Price',
+                data: dataPoints,
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
-            }]
-        };
+              }]
+        }
+
+
+        if (stocks) {
+            stocks.destroy();
+        }
+
+        const chartDiv = document.getElementById("stock-prices");
+        stocks = new Chart (
+            chartDiv,
+            {
+                type:'line',
+                data: data,
+            }
+        )
     }
 
     catch(err) {

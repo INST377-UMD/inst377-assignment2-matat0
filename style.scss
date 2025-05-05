@@ -107,3 +107,17 @@ body {
     padding:10px;
     margin:20px;
 }
+
+.chart-container {
+    background-color:$bg-module;
+    height:auto;
+    width:auto;
+    border-radius:8px;
+    box-shadow: $shadow-window;
+    margin-bottom:10px;
+}
+
+#stock-prices {
+    width:700;
+    height:400;
+}
