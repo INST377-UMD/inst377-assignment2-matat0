@@ -35,6 +35,10 @@ body {
     border-radius:8px;
 }
 
+.navigation a:hover {
+    background-color:azure;
+}
+
 .button-container {
     width:500px;
     height:180px;
@@ -64,10 +68,42 @@ body {
 .quote-container {
     background-color:$bg-inner;
     box-shadow:$shadow-window;
-    width:700px;
+    width:900px;
     height: 110px;
     padding:5px;
     border-radius:8px;
     text-align:center;
 }
 
+.audio-container {
+    font-family:$nunito;
+    background-color:$bg-inner;
+    margin:10px;
+    padding:20px;
+    width:870px;
+    border-radius:8px;
+    align-items:center;
+}
+
+.audio-header {
+    text-align:center;
+}
+
+.audio-button-container {
+    text-align:center;
+}
+
+#enable-listening, #disable-listening {
+    width:200px;
+    height:50px;
+}
+
+.stocks-container {
+    background-color:$bg-module;
+    border-radius:8px;
+    box-shadow:$shadow-window;
+    width:400px;
+    height:150px;
+    padding:10px;
+    margin:20px;
+}
